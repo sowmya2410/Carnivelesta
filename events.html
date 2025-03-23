@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Management System</title>
+<style>/* Styles for Navigation Bar */
+    nav {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    
+    nav ul li a:hover {
+      color: #82abf7; /* Change hover color as desired */
+    }
+    
+    /* Styles for Homepage */
+    body {
+      background-image:url(https://i.pinimg.com/564x/0c/9d/d1/0c9dd117803f0739cb8125a79f9a9836.jpg); /* Warm background color */
+    }
+    
+    .container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .container h1 {
+      font-size: 48px;
+      color: #333; /* Text color */
+    }
+    .whole{
+        margin:20px;
+        padding:10px;
+        background-color:rgb(247, 239, 245);
+    }
+
+
+
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.card {
+    position: relative;
+    width: 325px;
+    height: 450px;
+    background: #000;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.poster {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.poster::before {
+    content: '';
+    position: absolute;
+    bottom: -45%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: .3s;
+}
+
+.card:hover .poster::before {
+    bottom: 0;
+}
+
+.poster img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s;
+}
+
+.card:hover .poster img {
+    transform: scale(1.1);
+}
+
+.details {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 1.5em 1.5em 2em;
+    background: #000a;
+    backdrop-filter: blur(16px) saturate(120%);
+    transition: .3s;
+    color: #fff;
+    z-index: 2;
+}
+
+.card:hover .details {
+    bottom: 0;
+}
+
+.details h1,
+.details h2 {
+    font-weight: 700;
+}
+
+.details h1 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.details h2 {
+    font-weight: 400;
+    font-size: 1em;
+    margin-bottom: 10px;
+    opacity: .6;
+}
+
+.details .rating {
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    gap: .25em;
+}
+
+.details .rating i {
+    color: #e3c414;
+}
+
+.details .rating span {
+    margin-left: 0.25em;
+}
+
+.details .tags {
+    display: flex;
+    gap: .375em;
+    margin-bottom: .875em;
+    font-size: .85em;
+}
+
+.details .tags span {
+    padding: .35rem .65rem;
+    color: #fff;
+    border: 1.5px solid rgba(255 255 255 / 0.4);
+    border-radius: 4px;
+    border-radius: 50px;
+}
+
+.details .desc {
+    color: #fff;
+    opacity: .8;
+    line-height: 1.5;
+    margin-bottom: 1em;
+}
+
+.details .cast h3 {
+    margin-bottom: .5em;
+}
+
+.details .cast ul {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    width: 100%;
+}
+
+.details .cast ul li {
+    list-style: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid #fff;
+}
+
+.details .cast ul li img {
+    width: 100%;
+    height: 100%;
+}
+    </style>
+</head>
+<body>
+<div class="whole"> <!-- Main content (Homepage) -->
+  <div class="container" >
+    <h1>Carnival'esta 2023</h1>
+    <!-- Display featured events or any other content -->
+  </div>
+  <!-- Navigation bar -->
+  
+
+  <div class="wrapper">
+    <a href="eventsdisplay.php?category_id=6"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/564x/d5/5b/6c/d55b6c725a66bd51dde099652c95cda4.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Non-Technical</h1>
+       
+       
+        <div class="tags">
+          <span class="tag">Murder Mystery</span>
+          <span class="tag">Treasure Hunt</span>
+          
+        </div>
+        <p class="desc">
+          Join us in a welcoming atmosphere that encourages interaction, laughter, and meaningful exchanges. Whether you're an enthusiast, a connoisseur, or simply curious, our non-technical events invite you to discover, engage, and be part of an unforgettable experience that transcends boundaries
+        </p>
+       
+      </div></a>
+    </div>
+    <a href="eventsdisplay.php?category_id=5"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/564x/56/03/cf/5603cfdf1425bdcfd2fe6f73e4a29196.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Cultural Exhibit</h1>
+        
+        
+        <div class="tags">
+          <span class="tag">Arts & Crafts</span>
+          <span class="tag">Food Stalls</span>
+          
+        </div>
+        <p class="desc">
+          Complementing the culinary journey, discover a vibrant showcase of artistic expression at our art stalls.Savor a diverse palette of cuisines crafted by passionate food artisans, offering a range from savory to sweet. 
+        </p>
+        
+      </div></a>
+    </div>
+    <a href="eventsdisplay.php?category_id=4"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/564x/62/21/15/622115c29ee38c690bd897f4e85d230f.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Workshop</h1>
+        
+        <div class="tags">
+          <span class="tag yellow">Design Workshop</span>
+          <span class="tag">Digital Marketing</span>
+          
+        </div>
+        <p class="desc">
+          Expect an engaging, collaborative environment where you'll connect with like-minded individuals, share experiences, and leave with newfound inspiration and valuable takeaways to apply 
+        </p>
+        
+      </div>
+    </div></a>
+  </div>
+  <div class="wrapper">
+    <a href="eventsdisplay.php?category_id=2"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/736x/6c/33/e4/6c33e4958b81624198a12348b5172982.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Technology</h1>
+        
+        <div class="tags">
+          <span class="tag">Coding Quest</span>
+          <span class="tag">Web designing</span>
+          <span class="tag">Paper Presentation</span>
+        </div>
+        <p class="desc">
+          Marco, a disillusioned backpacker in his late 20s, embarks on a solitary journey in search for meaning.
+        </p>
+        
+      </div></a>
+    </div>
+    <a href="eventsdisplay.php?category_id=1"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/564x/74/2d/4a/742d4ad4c1f98f109975f2632bf20391.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Entertainment</h1>
+        
+        <div class="tags">
+          <span class="tag">DJ night</span>
+          <span class="tag">Concert</span>
+          <span class="tag">carnival Awards</span>
+          <span class="tag">dancers Blaze</span>
+        </div>
+        <p class="desc">
+          entertainment is new way of fun for students.
+        </p>
+
+      </div></a>
+    </div>
+    <a href="eventsdisplay.php?category_id=3"><div class="card">
+      <div class="poster"><img src="https://i.pinimg.com/564x/06/82/25/06822525088472e66bfa9c6694296910.jpg" alt="Location Unknown"></div>
+      <div class="details">
+        <h1>Sports</h1>
+        
+        <div class="tags">
+          <span class="tag yellow">Badminton League</span>
+          <span class="tag">Football League</span>
+          
+        </div>
+        <p class="desc">
+          the sports category encompasses a diverse range of activities, each with its unique set of rules, strategies, and fervent fan bases, creating an exciting tapestry of athletic excellence and sportsmanship.
+        </p>
+       
+        </div>
+      </div>
+    </div></a>
+  </div>
+
+  <!-- Include your JavaScript files -->
+  <script src="scripts.js"></script>
+</div> 
+</body>
+</html>

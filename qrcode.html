@@ -1,0 +1,201 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Generation Form</title>
+    <style>
+        /* Basic styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<form action="tickets.php" method="post">
+    <label for="event_name">Event Name:</label><br>
+    <input type="text" id="event_name" name="event_name"><br><br>
+
+    <label for="ticket_type">Ticket Type:</label><br>
+    <select id="ticket_type" name="ticket_type">
+        <option value="General">General</option>
+        <option value="VIP">VIP</option>
+        <option value="Premium">Premium</option>
+    </select><br><br>
+
+    <input type="submit" value="Generate Ticket">
+</form>
+
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, 
+						initial-scale=1.0" />
+	<title>QR Code Generator</title>
+	<style>
+		h1, h3 {
+		color: green;
+		}
+		body, header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		}
+	</style>
+
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+	</script>
+</head>
+
+<body>
+	
+	<main>
+		<form action="/"
+			id="qr-generation-form">
+			<input type="text"
+				name="qr-code-content"
+				id="qr-content1"
+				value=""
+				placeholder="Enter event name"
+				autocomplete="off" />
+
+        <label for="ticket_type">Ticket Type:</label><br>
+    <select id="qr-content2" name="ticket_type">
+        <option value="General">General</option>
+        <option value="VIP">VIP</option>
+        <option value="Premium">Premium</option>
+    </select><br><br>
+			<input type="submit"
+				value="Generate QR Code" />
+		</form><br />
+		<div id="qr-code"></div>
+	</main>
+</body>
+<script>
+	let qrContentInput1 = document.getElementById("qr-content1");
+  let qrContentInput2 = document.getElementById("qr-content2");
+	let qrGenerationForm = 
+	document.getElementById("qr-generation-form");
+	let qrCode;
+	
+	function generateQrCode(qrContent1,qrContent2) {
+    let combinedContent = qrContent1 + ',' + qrContent2;
+	return new QRCode("qr-code", {
+		text: combinedContent,
+		width: 100,
+		height: 100,
+		colorDark: "#000000",
+		colorLight: "#ffffff",
+		correctLevel: QRCode.CorrectLevel.H,
+	});
+	}
+	
+	// Event listener for form submit event
+	qrGenerationForm.addEventListener("submit", function (event) {
+	// Prevent form submission
+	event.preventDefault();
+	let qrContent1 = qrContentInput1.value;
+  let qrContent2 = qrContentInput2.value;
+	if (qrCode == null) {
+		
+		// Generate code initially
+		qrCode = generateQrCode(qrContent1,qrContent2);
+   
+	} else {
+		
+		// If code already generated then make 
+		// again using same object
+		qrCode.makeCode(qrContent1);
+    qrCode.makeCode(qrContent2);
+    
+    
+	}
+	});
+</script>
+
+</html>
+
+
+
+
+$sql = "SELECT ticket_cost FROM ticket WHERE ticketid = $row['ticketid']";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+	$row = $result->fetch_assoc();
+	$ticket_amount = $row['ticket_cost'];}
+
+
+	$sql_participant = "SELECT name FROM participant_details WHERE participant_id = '$participant_id'";
+$result_participant = $conn->query($sql_participant);
+$participant_name = ($result_participant->num_rows > 0) ? $result_participant->fetch_assoc()['name'] : 'Unknown';
+
+$sql = "SELECT ticket_type FROM ticket WHERE ticketid = $row['ticketid']";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+$row = $result->fetch_assoc();
+$ticket_type = $row['ticket_type'];}
+
+
+$sql = "SELECT event_name FROM events WHERE event_id = $row['event_id']";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+$row = $result->fetch_assoc();
+$eventname = $row['event_name'];}
+
+$sql = "SELECT registration_date FROM registration WHERE paymentid = $row['paymentid']";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+	$row = $result->fetch_assoc();
+	$regdate = $row['registration_date'];}
+
+	$sql = "SELECT registration_id FROM registration WHERE paymentid = $row['paymentid']";
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+		$row = $result->fetch_assoc();
+		$regid = $row['registration_id'];}
+
+		$sql = "SELECT paymentmode FROM payments WHERE paymentid = $row['paymentid']";
+		$result = $conn->query($sql);
+	
+		if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			$paymentmode = $row['paymentmode'];}
+
+
+
+
+
+
+echo '<div class="profile">';
+echo '<h2>Registration id:'.$regid.'</h2>';
+echo '<p><strong>Participant Name:</strong> '.$participant_name.'</p>';
+echo '<p><strong>Event name:</strong> '.$eventname.'</p>';
+echo '<p><strong>ticket Type:</strong> '.$ticket_type.'</p>';
+echo '<p><strong>Amount:</strong> '.$ticket_amount.'</p>';
+echo '<p><strong>Payment Mode:</strong> '.$paymentmode.'</p>';
+echo '<p><strong>Registration Date:</strong> '.$regdate.'</p>';
+
+echo '</div>';

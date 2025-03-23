@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toggle Heart and Redirect</title>
+    <style>
+		body{
+			background-color:aquamarine
+		}
+        .heart-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: red; /* Initial color */
+        }
+    </style>
+</head>
+<body>
+    <span class="heart-icon" onclick="toggleHeartAndRedirect(101)">&#10084;</span>
+
+    <script>
+        function toggleHeartAndRedirect(eventId) {
+            var heart = document.querySelector('.heart-icon');
+            
+            if (heart.style.color === 'red') {
+                heart.style.color = 'white'; // Change to white heart
+				
+				removeFromWishlist(eventId);// Redirect to page1.php
+            } else {
+                heart.style.color = 'red'; // Change to red heart
+                 // Redirect to page2.php
+				addToWishlist(eventId);
+				}
+        }
+		function addToWishlist(eventId) {
+            window.location.href = `wishlist.php?add=true&event_id=${eventId}`;
+        }
+
+        function removeFromWishlist(eventId) {
+            window.location.href = `wishlist.php?add=false&event_id=${eventId}`;
+        }
+    </script>
+</body>
+</html>
+
+

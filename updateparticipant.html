@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Details</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 20px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    input[type="date"] {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    input[type="submit"] {
+        padding: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .event-details {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+        /* Your custom CSS styling */
+        /* ... (existing styles) ... */
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <label for="eventDate">Select Date:</label>
+        <input type="date" id="eventDate" name="eventDate">
+        <input type="submit" value="Get Events">
+    </form>
+
+    <div class="event-details" id="eventDetails">
+        <?php
+        // PHP code to retrieve events based on the selected date
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $selectedDate = $_POST['eventDate'];
+            // Assuming you have a MySQL connection
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "carnival";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Query to retrieve events for the selected date
+            $sql = "SELECT * FROM events WHERE event_date = '$selectedDate'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Display event details
+                while ($row = $result->fetch_assoc()) {
+
+                  $organizerid=$row['organizer-id'];
+                   $scheduleid=$row['SCHEDULEID'];
+                   $venueid=$row['VENUE_ID'];
+                  $categoryid=$row['category_id'];
+
+$sql = "SELECT name, contact, email FROM organizer WHERE organizer_id = '$organizerid'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $orgname = $row['name'];
+    $orgcontact = $row['contact'];
+    $orgmail = $row['email'];}
+
+
+    $sql = "SELECT STARTTIME, ENDTIME FROM schedule WHERE SCHEDULE_ID = '$scheduleid'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $sttime = $row['STARTIME'];
+    $endtime = $row['ENDTIME'];}
+
+
+    $sql = "SELECT category_name FROM category WHERE category_id = '$categoryid'";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+       
+        $catname = $row['category_name'];}
+
+        $sql = "SELECT venue_name FROM venue WHERE VENUE_ID= '$venueid'";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+           
+            $venuename = $row['venue_name'];}
+
+
+
+                    echo "
+                        <h2>{$row['event_name']}</h2>
+                        <p><strong>Description:</strong> {$row['description']}</p>
+                        <p><strong>Date:</strong> {$row['event_date']}</p>
+                        <p><strong>Description:</strong> {$row['event_description']}</p>
+                        <p><strong>Event-Category:</strong> .$catname.</p>
+                        <p><strong>Venue:</strong> .$venuename.</p>
+                        <p><strong>Start-time:</strong> .$sttime.</p>
+                        <p><strong>End-time:</strong> .$endtime.</p>
+                        <p><strong>Organizer-Name:</strong> .$orgname.</p>
+                        <p><strong>Organizer-contact:</strong> .$orgcontact.</p>
+                        <p><strong>organizer-email:</strong> .$orgmail.</p>
+                        <p><strong>Tickets Available:</strong> {$row['total_tickets']}</p>
+                        
+                        <hr>
+                    ";
+                }
+            } else {
+                echo "No events found for the selected date.";
+            }
+
+            $conn->close();
+        }
+        ?>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+//
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Details</title>
+    <style>
+        /* Your custom CSS styling */
+        /* ... (existing styles) ... */
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <label for="eventDate">Select Date:</label>
+        <input type="date" id="eventDate" name="eventDate">
+        <input type="submit" value="Get Events">
+    </form>
+
+    <div class="event-details" id="eventDetails">
+        <?php
+        // PHP code to retrieve events based on the selected date
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $selectedDate = $_POST['eventDate'];
+            // Assuming you have a MySQL connection
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "carnival";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Query to retrieve events for the selected date
+            $sql = "SELECT * FROM events WHERE event_date = '$selectedDate'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Display event details
+                while ($row = $result->fetch_assoc()) {
+                   
+                    
+                    echo "<h2>{$row['event_name']}</h2>";
+                        
+                       echo "<p><strong>date:</strong> {$row['event_date']}</p>";
+                      echo  "<p><strong>dESCRIPTION:</strong> {$row['description']}</p>";
+                      echo  "<p><strong>Venuename:</strong>.$venuename. </p>";
+                      echo  "<p><strong>:</strong> {$row['organizer_id']}</p>";
+                      echo  "<p><strong>:</strong> {$row['SCHEDULEID']}</p>";
+                      echo  "<p><strong>:</strong> {$row['category_id']}</p>";
+                        
+                     echo  " <p><strong>Tickets Available:</strong> {$row['total_tickets']}</p>";
+                        
+                       echo" <hr>";
+                    
+                }
+            } else {
+                echo "No events found for the selected date.";
+            }
+
+            $conn->close();
+        }
+        ?>
+    </div>
+</body>
+</html>
+
+
+
+

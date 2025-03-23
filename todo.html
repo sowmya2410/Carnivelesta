@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer Banner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url('carnival’esta.png');
+        }
+        .whole{
+            background-image:url('carnival’esta.png');
+
+        }
+        
+       
+        
+        .countdown-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .countdown {
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="whole">
+    <div class="countdown-container">
+        <h1 class="countdown-title">Countdown Timer Banner</h1>
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <script>
+        // Set the countdown date (in UTC format)
+        const countdownDate = new Date('2024-01-22T00:00:00Z').getTime();
+
+        // Update the countdown every second
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            // Calculate remaining time
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const weeks = Math.floor(days / 7);
+            const months = Math.floor(weeks / 4.34524);
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById('countdown').innerHTML = `
+                 Days: ${days} 
+                <br>Hours: ${hours} Minutes: ${minutes} Seconds: ${seconds}
+            `;
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById('countdown').innerHTML = 'Countdown is over!';
+            }
+        }, 1000); // Update every second
+    </script>
+    </div>
+</body>
+</html>

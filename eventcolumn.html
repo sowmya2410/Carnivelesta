@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events</title>
+    <style>/* Add your CSS styles */
+        /* Add your CSS styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.events-container {
+    display: flex;
+    overflow-x: hidden;
+}
+
+.event {
+    width: 70%;
+    min-width: 300px;
+    margin-right: 20px;
+    border-radius: 8px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.event:hover {
+    transform: scale(1.05);
+}
+
+.event .event-details {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center;
+}
+
+.event h2 {
+    margin-bottom: 5px;
+}
+
+.event p {
+    font-size: 14px;
+}
+
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Events</h1>
+        <div class="events-container" id="eventsContainer">
+            <div class="event" style="background-image: url('https://i.pinimg.com/736x/0d/c1/e4/0dc1e431949fd815d6470cc951ccbacd.jpg')">
+                <div class="event-details">
+                    <h2>Event 1</h2>
+                    <p>Description of Event 1</p>
+                    <!-- Add more event details -->
+                </div>
+            </div>
+            <div class="event" style="background-image: url('https://i.pinimg.com/736x/0d/c1/e4/0dc1e431949fd815d6470cc951ccbacd.jpg')">
+                <div class="event-details">
+                    <h2>Event 2</h2>
+                    <p>Description of Event 2</p>
+                    <!-- Add more event details -->
+                </div>
+            </div>
+            <!-- Add more events -->
+            <div class="event" style="background-image: url('https://i.pinimg.com/736x/0d/c1/e4/0dc1e431949fd815d6470cc951ccbacd.jpg')">
+                <div class="event-details">
+                    <h2>Event 2</h2>
+                    <p>Description of Event 2</p>
+                    <!-- Add more event details -->
+                </div>
+            </div>
+
+            <div class="event" style="background-image: url('https://i.pinimg.com/736x/0d/c1/e4/0dc1e431949fd815d6470cc951ccbacd.jpg')">
+                <div class="event-details">
+                    <h2>Event 2</h2>
+                    <p>Description of Event 2</p>
+                    <!-- Add more event details -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>// Swipe functionality using JavaScript
+
+        // Swipe transition using JavaScript
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+const eventsContainer = document.querySelector('.events-container');
+
+eventsContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - eventsContainer.offsetLeft;
+    scrollLeft = eventsContainer.scrollLeft;
+});
+
+eventsContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+});
+
+eventsContainer.addEventListener('mouseup', () => {
+    isDown = false;
+});
+
+eventsContainer.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - eventsContainer.offsetLeft;
+    const walk = (x - startX) * 1.5; // Adjust the multiplier for sensitivity
+    eventsContainer.scrollLeft = scrollLeft - walk;
+});
+
+        </script>
+</body>
+</html>
